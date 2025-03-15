@@ -14,15 +14,12 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
-// ✅ Body parser (Must be before routes)
 app.use(express.json());
 
-// ✅ Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/trades", tradeRoutes);
 
-// ✅ WebSockets
 io.on("connection", (socket) => {
   logger.info("New WebSocket Connection");
 
