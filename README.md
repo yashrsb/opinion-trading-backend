@@ -147,7 +147,7 @@ To test the API using Postman:
 
 1. Open **Postman** and go to **Import**.
 2. Choose **Import From Link**.
-3. Paste the following URL (replace `<POSTMAN_COLLECTION_URL>` with actual collection link):
+3. Paste the following URL:
    ```
    https://api.postman.com/collections/21612992-74baaa67-ef58-4cf9-b967-e06d0e856ebe
    ```
