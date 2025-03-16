@@ -4,12 +4,12 @@
 This is a backend system for an **Opinion Trading App**, built using **Node.js (Express.js)**, **MongoDB**, and **Socket.io**. It fetches live event data, processes trades, and provides real-time updates using WebSockets.
 
 ## Features
-- **User Authentication** (JWT-based login & registration)
-- **Live Event Data Fetching** (from external APIs or mock data)
-- **WebSocket Integration** (real-time trade updates)
-- **Trade Execution & Settlement**
-- **Admin Panel API** (for managing events & trades)
-- **Logging & Error Handling** (Winston for logging)
+- User Authentication
+- Live Event Data Fetching
+- WebSocket Integration
+- Trade Execution & Settlement
+- Admin Panel API
+- Logging & Error Handling
 
 ## Tech Stack
 - **Node.js** (Express.js for backend API)
@@ -24,7 +24,7 @@ This is a backend system for an **Opinion Trading App**, built using **Node.js (
 ## Installation & Setup
 
 ### Prerequisites
-- **Node.js** installed (v16+ recommended)
+- **Node.js** installed
 - **MongoDB** installed locally or a cloud database (MongoDB Atlas)
 - **Git** installed
 
@@ -43,12 +43,12 @@ npm install
 Create a `.env` file in the root directory and add:
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/opinion_trading
+MONGO_URI=mongodb://localhost:27017/<db-name>
 JWT_SECRET=secret_key
 ```
 
 ### Run the Server
-For development (with auto-reload):
+For development (auto-reload):
 ```sh
 npm run dev
 ```
@@ -57,7 +57,7 @@ For production:
 npm start
 ```
 
-Server will run at **http://localhost:5000**
+Server will run at **http://localhost:5000** or the deployed URL **[https://opinion-trading-backend.onrender.com](https://opinion-trading-backend.onrender.com)**
 
 ---
 
@@ -70,16 +70,16 @@ Server will run at **http://localhost:5000**
 - **Body:**
   ```json
   {
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "password123"
+    "username": "test",
+    "email": "test@mail.com",
+    "password": "pass123"
   }
   ```
 - **Response:**
   ```json
   {
     "message": "User registered successfully",
-    "user": { "id": "...", "username": "testuser" }
+    "user": { "id": "..", "username": "test" }
   }
   ```
 
@@ -88,14 +88,14 @@ Server will run at **http://localhost:5000**
 - **Body:**
   ```json
   {
-    "email": "test@example.com",
-    "password": "password123"
+    "email": "test@mail.com",
+    "password": "pass123"
   }
   ```
 - **Response:**
   ```json
   {
-    "token": "your_jwt_token"
+    "token": "generated_jwt_token"
   }
   ```
 
@@ -105,7 +105,7 @@ Server will run at **http://localhost:5000**
 - **Endpoint:** `GET /api/events`
 - **Headers:**
   ```json
-  { "Authorization": "Bearer your_jwt_token" }
+  { "Authorization": "Bearer jwt_token" }
   ```
 
 #### **Create Event (Admin Only)**
@@ -125,7 +125,7 @@ Server will run at **http://localhost:5000**
 - **Body:**
   ```json
   {
-    "event": "event_id_here",
+    "event": "event_id",
     "amount": 100,
     "odds": 2.5
   }
@@ -142,18 +142,24 @@ Server will run at **http://localhost:5000**
 
 ---
 
-## Logging & Error Handling
-- **Winston** is used for structured logging
-- Errors are handled with proper HTTP status codes
+## API Testing with Postman
+To test the API using Postman:
+
+1. Open **Postman** and go to **Import**.
+2. Choose **Import From Link**.
+3. Paste the following URL (replace `<POSTMAN_COLLECTION_URL>` with your actual collection link):
+   ```
+   https://api.postman.com/collections/21612992-74baaa67-ef58-4cf9-b967-e06d0e856ebe
+   ```
+4. Click **Import**.
+5. Update the environment variables if needed.
+6. Test the APIs using **http://localhost:5000** (for local development) or **[https://opinion-trading-backend.onrender.com](https://opinion-trading-backend.onrender.com)** (for deployed version).
 
 ---
 
-## Deployment
-### Deploy on Render
-1. Push the code to GitHub.
-2. Link the repository in **Render**.
-3. Set up environment variables.
-4. Deploy & get the live API URL.
+## Logging & Error Handling
+- **Winston** is used for structured logging
+- Errors are handled with proper HTTP status codes
 
 ---
 
@@ -164,9 +170,3 @@ Feel free to fork, create a feature branch, and submit a PR!
 
 ## License
 This project is **MIT Licensed**.
-
----
-
-## Contact
-For queries, contact **yrajsingh0001@gmail.com**.
-
