@@ -1,10 +1,12 @@
 const express = require("express");
-const authMiddleware = require("../middleware/auth");
 const { placeTrade, getUserTrades } = require("../controllers/tradeController");
+const authMiddleware = require("../middleware/auth");
 
-const router = express.Router();
+module.exports = (io) => {
+  const router = express.Router();
 
-router.post("/", authMiddleware, placeTrade);
-router.get("/", authMiddleware, getUserTrades);
+  router.post("/", authMiddleware, (req, res) => placeTrade(req, res, io));
+  router.get("/", authMiddleware, getUserTrades);
 
-module.exports = router;
+  return router;
+};

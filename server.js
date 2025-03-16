@@ -5,7 +5,6 @@ const connectDB = require("./src/config/db");
 const logger = require("./src/utils/logger");
 const authRoutes = require("./src/routes/auth");
 const eventRoutes = require("./src/routes/event");
-const tradeRoutes = require("./src/routes/trade");
 
 require("dotenv").config();
 connectDB();
@@ -14,11 +13,13 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
+const tradeRoutesWithSockets = require("./src/routes/trade")(io);
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
-app.use("/api/trades", tradeRoutes);
+app.use("/api/trades", tradeRoutesWithSockets);
 
 io.on("connection", (socket) => {
   logger.info("New WebSocket Connection");
